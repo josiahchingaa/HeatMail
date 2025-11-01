@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-  Container,
   Box,
   Typography,
   Paper,
@@ -193,7 +192,7 @@ const Mailboxes = () => {
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Box sx={{ mt: 4, mb: 4, px: { xs: 2, sm: 3, md: 4, lg: 5 } }}>
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
           <Box>
             <Typography variant="h4" gutterBottom fontWeight="bold">
@@ -345,7 +344,7 @@ const Mailboxes = () => {
             </TableContainer>
           )}
         </Paper>
-      </Container>
+      </Box>
 
       {/* Mailbox Actions Menu */}
       <Menu

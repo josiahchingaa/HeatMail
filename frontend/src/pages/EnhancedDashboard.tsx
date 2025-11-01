@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  Container,
   Box,
   Typography,
   Paper,
@@ -194,7 +193,7 @@ const EnhancedDashboard = () => {
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="xl" sx={{ mt: { xs: 2, sm: 4 }, mb: 4, px: { xs: 2, sm: 3 } }}>
+      <Box sx={{ mt: { xs: 2, sm: 4 }, mb: 4, px: { xs: 2, sm: 3, md: 4, lg: 5 } }}>
         <Box mb={{ xs: 2, sm: 4 }}>
           <Typography variant="h4" gutterBottom fontWeight="bold" fontSize={{ xs: '1.5rem', sm: '2.125rem' }}>
             Welcome back, {user?.firstName}!
@@ -430,7 +429,7 @@ const EnhancedDashboard = () => {
             </Button>
           </Paper>
         )}
-      </Container>
+      </Box>
     </Box>
   );
 };
