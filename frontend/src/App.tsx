@@ -1,11 +1,12 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
+import EnhancedDashboard from './pages/EnhancedDashboard';
+import Mailboxes from './pages/Mailboxes';
 
 const theme = createTheme({
   palette: {
@@ -22,6 +23,30 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: '#4caf50',
+              secondary: '#fff',
+            },
+          },
+          error: {
+            duration: 4000,
+            iconTheme: {
+              primary: '#f44336',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
       <AuthProvider>
         <Router>
           <Routes>
@@ -31,7 +56,15 @@ function App() {
               path="/dashboard"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <EnhancedDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/mailboxes"
+              element={
+                <ProtectedRoute>
+                  <Mailboxes />
                 </ProtectedRoute>
               }
             />
