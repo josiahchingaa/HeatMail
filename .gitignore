@@ -17,6 +17,9 @@ docs/CREDENTIALS.md
 **/*.p12
 **/*.jks
 
+# Claude Code settings (contains tokens)
+.claude/settings.local.json
+
 # SSH Keys
 *.ppk
 id_rsa

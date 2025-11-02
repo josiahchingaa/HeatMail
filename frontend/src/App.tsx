@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import OAuthCallback from './pages/OAuthCallback';
 import EnhancedDashboard from './pages/EnhancedDashboard';
 import Mailboxes from './pages/Mailboxes';
 import AddMailbox from './pages/AddMailbox';
@@ -55,6 +56,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/auth/callback" element={<OAuthCallback />} />
             <Route
               path="/dashboard"
               element={

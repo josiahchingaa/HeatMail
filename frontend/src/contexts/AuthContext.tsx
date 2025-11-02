@@ -17,6 +17,7 @@ interface AuthContextType {
   register: (data: any) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
+  setToken: (token: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -49,6 +50,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   };
 
+  const setToken = async (token: string) => {
+    // Fetch user data with the token
+    try {
+      const currentUser = authService.getCurrentUser();
+      setUser(currentUser);
+    } catch (error) {
+      console.error('Failed to fetch user with token:', error);
+    }
+  };
+
   const value = {
     user,
     loading,
@@ -56,6 +67,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     register,
     logout,
     isAuthenticated: !!user,
+    setToken,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

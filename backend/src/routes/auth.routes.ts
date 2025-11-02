@@ -10,6 +10,10 @@ router.post('/register', authLimiter, authController.register);
 router.post('/login', authLimiter, authController.login);
 router.post('/refresh', authController.refresh);
 
+// Google OAuth routes
+router.get('/google', authController.googleAuth);
+router.get('/google/callback', authController.googleCallback);
+
 // Protected routes
 router.get('/me', authenticate, authController.getMe);
 router.put('/profile', authenticate, authController.updateProfile);

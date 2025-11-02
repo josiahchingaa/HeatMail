@@ -9,7 +9,9 @@ import {
   Link,
   Alert,
   CircularProgress,
+  Divider,
 } from '@mui/material';
+import { Google as GoogleIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -20,6 +22,12 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const handleGoogleSignIn = () => {
+    // Redirect to backend Google OAuth endpoint
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    window.location.href = `${apiUrl}/api/auth/google`;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +69,32 @@ const Login: React.FC = () => {
               {error}
             </Alert>
           )}
+
+          {/* Google Sign-In Button */}
+          <Button
+            fullWidth
+            variant="outlined"
+            size="large"
+            onClick={handleGoogleSignIn}
+            startIcon={<GoogleIcon />}
+            sx={{
+              mb: 2,
+              borderColor: '#4285f4',
+              color: '#4285f4',
+              '&:hover': {
+                borderColor: '#357ae8',
+                backgroundColor: 'rgba(66, 133, 244, 0.04)',
+              },
+            }}
+          >
+            Sign in with Google
+          </Button>
+
+          <Divider sx={{ my: 3 }}>
+            <Typography variant="body2" color="text.secondary">
+              OR
+            </Typography>
+          </Divider>
 
           <form onSubmit={handleSubmit}>
             <TextField
