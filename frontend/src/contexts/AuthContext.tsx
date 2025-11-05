@@ -51,12 +51,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const setToken = async (token: string) => {
-    // Fetch user data with the token
+    // Fetch user data with the token from API
     try {
-      const currentUser = authService.getCurrentUser();
-      setUser(currentUser);
+      const response = await authService.getProfile();
+      if (response.success && response.data) {
+        setUser(response.data);
+      }
     } catch (error) {
       console.error('Failed to fetch user with token:', error);
+      throw error;
     }
   };
 
