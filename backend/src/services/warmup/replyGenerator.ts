@@ -153,9 +153,23 @@ export const generateSimpleReply = (senderEmail: string, receiverEmail: string):
 };
 
 /**
- * Calculate reply delay (2-8 hours in milliseconds)
+ * Calculate reply delay (2-8 hours in milliseconds, or 1-3 minutes in testing mode)
  */
 export const calculateReplyDelay = (): number => {
+  const isTestingMode = process.env.TESTING_MODE === 'true';
+
+  if (isTestingMode) {
+    // Testing mode: 1-3 minutes
+    const minMinutes = 1;
+    const maxMinutes = 3;
+    const delayMinutes = Math.random() * (maxMinutes - minMinutes) + minMinutes;
+    const delayMs = delayMinutes * 60 * 1000;
+
+    logger.debug('Reply delay calculated (TESTING MODE)', { minutes: delayMinutes.toFixed(2) });
+    return delayMs;
+  }
+
+  // Production mode: 2-8 hours
   const minHours = parseInt(process.env.MIN_REPLY_DELAY_HOURS || '2');
   const maxHours = parseInt(process.env.MAX_REPLY_DELAY_HOURS || '8');
 
